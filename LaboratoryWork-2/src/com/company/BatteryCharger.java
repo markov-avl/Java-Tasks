@@ -1,7 +1,5 @@
 package com.company;
 
-// 2009 - 3 - a
-
 public class BatteryCharger {
     private final int[] rateTable = {
             50,  60,  160, 60,  80, 100, 100, 120,
