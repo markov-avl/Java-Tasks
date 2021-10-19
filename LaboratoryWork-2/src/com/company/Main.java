@@ -3,6 +3,12 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        BatteryCharger batteryCharger = new BatteryCharger();
+        System.out.println(batteryCharger.getChargingCost(12, 1) == 40);
+        System.out.println(batteryCharger.getChargingCost(0, 2) == 110);
+        System.out.println(batteryCharger.getChargingCost(22, 7) == 550);
+        System.out.println(batteryCharger.getChargingCost(22, 30) == 3710);
+        System.out.println(batteryCharger.getChargingCost(-1, 1) == -1);
+        System.out.println(batteryCharger.getChargingCost(12, -1) == -1);
     }
 }

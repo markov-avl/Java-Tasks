@@ -16,11 +16,14 @@ public class BatteryCharger {
      * Precondition: chargeTime > 0
      * @return the total cost to charge the battery if preconditions are performed else -1
      */
-    private int getChargingCost(int startHour, int chargeTime) {
+    public int getChargingCost(int startHour, int chargeTime) {
         if (startHour < 0 || startHour > 23 || chargeTime <= 0) {
             return -1;
         }
-
-        return 0;
+        int cost = 0;
+        for (int i = startHour, k = 0; k < chargeTime; ++i, ++k) {
+            cost += rateTable[i % rateTable.length];
+        }
+        return cost;
     }
 }
