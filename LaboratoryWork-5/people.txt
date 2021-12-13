@@ -2,8 +2,3 @@ firstName: Дмитрий
 lastName: Корошев
 fatherName: Григорьевич
 yearOfBirth: 2003
-
-firstName: Имя
-lastName: Фамилия
-fatherName: Отчество
-yearOfBirth: 1998
