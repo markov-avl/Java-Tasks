@@ -9,26 +9,26 @@ public class Client {
         try {
             try {
                 Socket clientSocket = new Socket(HOST, Server.PORT);
-                System.out.println("You connected to the server on port" + Server.PORT);
+                System.out.println("You connected to the server on port " + Server.PORT);
                 System.out.println("Send \"" + Server.DISCONNECT_KEYWORD + "\" to disconnect the server");
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
                 BufferedReader inputStream = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 BufferedWriter outputStream = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-
-                System.out.print("Message: ");
-
-                String outputMessage = "";
-                while (!outputMessage.equals(Server.DISCONNECT_KEYWORD)) {
+                while (true) {
+                    System.out.print("Message: ");
                     String inputMessage = reader.readLine();
                     outputStream.write(inputMessage + "\n");
                     outputStream.flush();
-                    outputMessage = inputStream.readLine();
+                    String outputMessage = inputStream.readLine();
                     if (outputMessage == null) {
                         throw new NullPointerException();
                     }
-                    System.out.println(outputMessage);
+                    if (outputMessage.equals(Server.DISCONNECT_KEYWORD)) {
+                        break;
+                    }
+                    System.out.println("Return: " + outputMessage);
                 }
 
                 System.out.println("Goodbye!");

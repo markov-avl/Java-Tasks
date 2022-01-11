@@ -2,7 +2,6 @@ package com.company;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Objects;
 
 public class Server {
     public static final int PORT = 8001;
@@ -24,21 +23,26 @@ public class Server {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
                     while (true) {
                         String outputMessage = inputStream.readLine();
+                        if (outputMessage == null) {
+                            throw new NullPointerException();
+                        }
                         if (outputMessage.equals(Server.DISCONNECT_KEYWORD)) {
                             break;
                         }
-                        System.out.println(outputMessage);
-                        System.out.print("Message: ");
-                        outputStream.write(reader.readLine());
+                        System.out.println("Message: " + outputMessage);
+                        System.out.print("Return: ");
+                        outputStream.write(reader.readLine() + "\n");
                         outputStream.flush();
                     }
+                } catch (NullPointerException ignored) {
+                    System.out.println("Seems like the client was disconnected!");
                 } finally {
                     inputStream.close();
                     outputStream.close();
                 }
             } finally {
-                System.out.println("Server was stopped");
                 server.close();
+                System.out.println("Server was stopped");
             }
         } catch (IOException e) {
             e.printStackTrace();

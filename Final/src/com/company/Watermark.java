@@ -45,6 +45,8 @@ public class Watermark {
             System.out.println("The output image saved in " + outputImageName);
         } catch (IOException ignored) {
             System.out.println("ERROR: Cannot get source image!");
+        } catch (NullPointerException ignored) {
+            System.out.println("ERROR: Source file is not an image!");
         }
     }
 
